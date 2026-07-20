@@ -25,7 +25,11 @@ class Process
         ProcessState state; // state - current state of the process
         int startTime; // startTime - time at which process starts
         int completionTime; // completionTime - time at which process completes
+        int waitingTime; // waitingTime - time spent waiting in ready queue
+        int turnaroundTime; // turnaroundTime - time from arrival to completion
+        int responseTime; // responseTime - time from arrival to first execution
     public:
+        // Constructor
         Process(int pid, int arrivalTime, int burstTime, int priority);
 
         // Getters
@@ -38,11 +42,17 @@ class Process
         ProcessState getState() const;
         int getStartTime() const;
         int getCompletionTime() const;
+        int getWaitingTime() const;
+        int getTurnaroundTime() const;
+        int getResponseTime() const;
 
         // Setters
         void setRemainingTime(int remainingTime) ;
         void setState(ProcessState state) ;
         void setStartTime(int startTime) ;
         void setCompletionTime(int completionTime) ;
+        void setWaitingTime(int waitingTime) ;
+        void setTurnaroundTime(int turnaroundTime) ;
+        void setResponseTime(int responseTime) ;
 
 };

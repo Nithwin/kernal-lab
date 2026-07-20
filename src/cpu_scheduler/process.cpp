@@ -55,6 +55,19 @@ int Process::getCompletionTime() const
     return completionTime;
 }
 
+int Process::getWaitingTime() const {
+    return waitingTime;
+}
+
+int Process::getTurnaroundTime() const {
+    return turnaroundTime;
+}
+
+int Process::getResponseTime() const {
+    return responseTime;
+}
+
+
 void Process::setRemainingTime(int remainingTime)  
 {
     this->remainingTime = remainingTime;
@@ -74,3 +87,16 @@ void Process::setState(ProcessState state)
 {
     this->state = state;
 }
+
+void Process::setWaitingTime(int waitingTime) {
+    this->waitingTime = waitingTime;
+}
+
+void Process::setTurnaroundTime(int turnaroundTime) {
+    this->turnaroundTime = turnaroundTime;
+}
+
+void Process::setResponseTime(int responseTime) {
+    this->responseTime = responseTime;
+}
+
