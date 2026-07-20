@@ -3,6 +3,7 @@
 #include <iomanip>
 #include "cpu_scheduler/process.h"
 #include "cpu_scheduler/algorithms/fcfs.h"
+#include "cpu_scheduler/utils/schedule_printer.h"
 
 int main(){
     std::vector<Process> processes = {
@@ -14,20 +15,6 @@ int main(){
     FCFSScheduler scheduler;
     scheduler.schedule(processes);
 
-    std::cout << "| PID | Arrival | Burst | Start | Completion | Waiting | Turnaround | Response |\n";
-    std::cout << "| --: | ------: | ----: | ----: | ---------: | ------: | ---------: | -------: |\n";
-    for(const auto& process: processes)
-    {
-        std::cout << "| " << std::setw(3) << process.getPid()
-                  << " | " << std::setw(7) << process.getArrivalTime()
-                  << " | " << std::setw(5) << process.getBurstTime()
-                  << " | " << std::setw(5) << process.getStartTime()
-                  << " | " << std::setw(10) << process.getCompletionTime()
-                  << " | " << std::setw(7) << process.getWaitingTime()
-                  << " | " << std::setw(10) << process.getTurnaroundTime()
-                  << " | " << std::setw(8) << process.getResponseTime()
-                  << " |\n";
-    }
-    std::cout << "\n\n";
+    SchedulePrinter::print(processes);
     return 0;
 }
