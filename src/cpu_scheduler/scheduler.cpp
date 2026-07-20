@@ -1,12 +1,15 @@
 #include "cpu_scheduler/scheduler.h"
 
-void Scheduler::startProcess(Process& process, int currentTime)
+void Scheduler::startProcess(Process &process, int currentTime)
 {
-    process.setStartTime(currentTime);
+    if (process.getStartTime() == -1)
+    {
+        process.setStartTime(currentTime);
+    }
     process.setState(ProcessState::Running);
 }
 
-void Scheduler::finishProcess(Process& process, int currentTime)
+void Scheduler::finishProcess(Process &process, int currentTime)
 {
     process.setCompletionTime(currentTime);
     process.setRemainingTime(0);

@@ -14,6 +14,7 @@ add_executable(KernelLab
     src/cpu_scheduler/scheduler.cpp
     src/cpu_scheduler/algorithms/fcfs.cpp
     src/cpu_scheduler/algorithms/sjf.cpp
+    src/cpu_scheduler/algorithms/srtf.cpp
     src/cpu_scheduler/utils/schedule_printer.cpp
 
 )
