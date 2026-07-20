@@ -9,7 +9,10 @@ Process::Process(
     remainingTime(burstTime),
     state(ProcessState::New),
     startTime(-1),
-    completionTime(-1)
+    completionTime(-1),
+    waitingTime(-1),
+    turnaroundTime(-1),
+    responseTime(-1)
     {
         
     }
