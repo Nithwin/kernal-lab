@@ -16,5 +16,6 @@ add_executable(KernelLab
     src/cpu_scheduler/algorithms/sjf.cpp
     src/cpu_scheduler/algorithms/srtf.cpp
     src/cpu_scheduler/algorithms/priority.cpp
+    src/cpu_scheduler/algorithms/round_robin.cpp
     src/cpu_scheduler/utils/schedule_printer.cpp
 )

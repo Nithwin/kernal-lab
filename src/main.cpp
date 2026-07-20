@@ -6,16 +6,16 @@
 #include "cpu_scheduler/algorithms/sjf.h"
 #include "cpu_scheduler/algorithms/srtf.h"
 #include "cpu_scheduler/algorithms/priority.h"
+#include "cpu_scheduler/algorithms/round_robin.h"
 #include "cpu_scheduler/utils/schedule_printer.h"
 
 int main()
 {
     std::vector<Process> processes = {
-        Process(1, 0, 5, 3),
+        Process(1, 0, 5, 2),
         Process(2, 1, 4, 1),
-        Process(3, 2, 2, 2)};
-
-    PriorityScheduler scheduler;
+        Process(3, 2, 2, 3)};
+    RoundRobinScheduler scheduler(2);
     scheduler.schedule(processes);
 
     SchedulePrinter::print(processes);
