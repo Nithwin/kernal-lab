@@ -5,16 +5,17 @@
 #include "cpu_scheduler/algorithms/fcfs.h"
 #include "cpu_scheduler/algorithms/sjf.h"
 #include "cpu_scheduler/algorithms/srtf.h"
+#include "cpu_scheduler/algorithms/priority.h"
 #include "cpu_scheduler/utils/schedule_printer.h"
 
 int main()
 {
     std::vector<Process> processes = {
-        Process(1, 0, 8, 1),
-        Process(2, 2, 4, 1),
-        Process(3, 4, 1, 1)};
+        Process(1, 0, 5, 3),
+        Process(2, 1, 4, 1),
+        Process(3, 2, 2, 2)};
 
-    SRTFScheduler scheduler;
+    PriorityScheduler scheduler;
     scheduler.schedule(processes);
 
     SchedulePrinter::print(processes);
