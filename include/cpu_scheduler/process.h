@@ -15,10 +15,10 @@ class Process
 {
     private:
         // Identity
-        const int pid; // pid - process id
-        const int arrivalTime; // arrivalTime - time at which process arrives
-        const int burstTime; // burstTime - time required to complete the process
-        const int priority; // priority - priority of the process
+        int pid; // pid - process id
+        int arrivalTime; // arrivalTime - time at which process arrives
+        int burstTime; // burstTime - time required to complete the process
+        int priority; // priority - priority of the process
 
         // Runtime
         int remainingTime; // remainingTime - time remaining for the process to complete
