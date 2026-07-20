@@ -5,6 +5,11 @@ Process::Process(
 ) : pid(pid),
     arrivalTime(arrivalTime),
     burstTime(burstTime),
-    priority(priority) {
+    priority(priority),
+    ProcessState(ProcessState::New),
+    remainingTime(burstTime),
+    startTime(-1),
+    completionTime(-1),
+    {
         
     }
