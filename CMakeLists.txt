@@ -11,4 +11,5 @@ include_directories(include)
 add_executable(KernelLab
     src/main.cpp
     src/cpu_scheduler/process.cpp
+    src/cpu_scheduler/algorithms/fcfs.cpp
 )

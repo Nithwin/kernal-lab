@@ -7,8 +7,8 @@
 class Scheduler 
 {
     public:
-        virtual void scheduler(vector<Process> &processes) = 0;
+        virtual void schedule(std::vector<Process> &processes) = 0;
 
 
         virtual ~Scheduler() = default;
-}
+};
