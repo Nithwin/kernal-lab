@@ -32,28 +32,10 @@ void FCFSScheduler::schedule(std::vector<Process> &processes)
             currentTime = process.getArrivalTime();
         }
 
-        // setting the start time of the process
-        process.setStartTime(currentTime);
-        process.setState(ProcessState::Running);
+        startProcess(process, currentTime);
 
-        // updating the current time
         currentTime += process.getBurstTime();
 
-        // setting the completion time of the process
-        process.setCompletionTime(currentTime);
-        process.setState(ProcessState::Terminated);
-        process.setRemainingTime(0);
-
-        // calculating turnaround time
-        int turnaroundTime = process.getCompletionTime() - process.getArrivalTime();
-        process.setTurnaroundTime(turnaroundTime);
-
-        // calculating waiting time
-        int waitingTime = turnaroundTime - process.getBurstTime();
-        process.setWaitingTime(waitingTime);
-
-        // calculating response time
-        int responseTime = process.getStartTime() - process.getArrivalTime();
-        process.setResponseTime(responseTime);
+        finishProcess(process, currentTime);
     }
 }

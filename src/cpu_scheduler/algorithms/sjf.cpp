@@ -58,30 +58,13 @@ void SJFScheduler::schedule(std::vector<Process>& processes)
             continue;
         }
 
-        // Starting the Process
-        selectedProcess->setStartTime(currentTime);
-        selectedProcess->setState(ProcessState::Running);
+        startProcess(*selectedProcess, currentTime);
 
-        // Executing the Process
         currentTime += selectedProcess->getBurstTime();
 
-        // Completing the Process
-        selectedProcess->setCompletionTime(currentTime);
-        selectedProcess->setRemainingTime(0);
-        selectedProcess->setState(ProcessState::Terminated);
-
-
-        // Calculate metrics
-        // Time taken to perform the job
-        int turnaroundTime = selectedProcess->getCompletionTime() - selectedProcess->getArrivalTime();
-        selectedProcess->setTurnaroundTime(turnaroundTime);
-
-        int waitingTime = turnaroundTime - selectedProcess->getBurstTime();
-        selectedProcess->setWaitingTime(waitingTime);
-
-        int responseTime = selectedProcess->getStartTime() - selectedProcess->getArrivalTime();
-        selectedProcess->setResponseTime(responseTime);
+        finishProcess(*selectedProcess, currentTime);
 
         completedProcesses++;
+        
     }
 }

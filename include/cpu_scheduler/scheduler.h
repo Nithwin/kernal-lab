@@ -11,4 +11,9 @@ class Scheduler
 
 
         virtual ~Scheduler() = default;
+        
+    protected:
+    void startProcess(Process& process, int currentTime);
+
+    void finishProcess(Process& process, int currentTime);
 };
