@@ -5,3 +5,8 @@ totalMemory(totalMemory)
 {
     blocks.emplace_back(0, totalMemory);
 }
+
+const std::vector<Memory>& MemoryManager::getBlocks() const
+{
+    return blocks;
+}

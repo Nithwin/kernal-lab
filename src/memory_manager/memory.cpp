@@ -43,3 +43,7 @@ void Memory::setPid(int pid)
 {
     this->pid = pid;
 }
+
+void Memory::setSize(int size){
+    this->size = size;
+}

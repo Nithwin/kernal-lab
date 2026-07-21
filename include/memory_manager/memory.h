@@ -20,4 +20,5 @@ public:
     // Setters
     void setIsAllocated(bool allocated);
     void setPid(int pid);
+    void setSize(int size);
 };

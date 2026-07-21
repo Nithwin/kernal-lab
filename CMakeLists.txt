@@ -19,4 +19,7 @@ add_executable(KernelLab
     src/cpu_scheduler/algorithms/round_robin.cpp
     src/cpu_scheduler/utils/schedule_printer.cpp
     src/memory_manager/memory.cpp
+    src/memory_manager/manager.cpp
+    src/memory_manager/algorithms/first_fit.cpp
+    src/memory_manager/utils/memory_printer.cpp
 )
