@@ -13,6 +13,8 @@ public:
 
     virtual bool allocate(int pid, int size) = 0;
 
+    virtual bool deallocate(int pid);
+
     const std::vector<Memory>& getBlocks() const;
 
     virtual ~MemoryManager() = default;

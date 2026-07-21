@@ -15,19 +15,20 @@ int main()
 {
     FirstFit memory(1024);
 
-    std::cout << "Initial Memory\n";
-    MemoryPrinter::print(memory.getBlocks());
-
     memory.allocate(1, 200);
-    std::cout << "\nAfter Allocating PID 1 (200)\n";
-    MemoryPrinter::print(memory.getBlocks());
-
     memory.allocate(2, 300);
-    std::cout << "\nAfter Allocating PID 2 (300)\n";
+    memory.allocate(3, 100);
+
+    std::cout << "Initial Layout\n";
     MemoryPrinter::print(memory.getBlocks());
 
-    memory.allocate(3, 100);
-    std::cout << "\nAfter Allocating PID 3 (100)\n";
+    std::cout << "\nDeallocate PID 2\n";
+    memory.deallocate(2);
     MemoryPrinter::print(memory.getBlocks());
+
+    std::cout << "\nDeallocate PID 3\n";
+    memory.deallocate(3);
+    MemoryPrinter::print(memory.getBlocks());
+
     return 0;
 }
