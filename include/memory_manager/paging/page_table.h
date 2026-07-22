@@ -7,10 +7,16 @@
 class PageTable
 {
 private:
+    int pid;
     std::vector<Page> pages;
 
 public:
-    PageTable(int numberOfPages);
+    PageTable();
+    PageTable(int pid);
+
+    int getPid() const;
+
+    void addPage(const Page& page);
 
     Page& getPage(int pageNumber);
 

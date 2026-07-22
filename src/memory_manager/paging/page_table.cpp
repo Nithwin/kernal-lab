@@ -1,11 +1,23 @@
 #include "memory_manager/paging/page_table.h"
 
-PageTable::PageTable(int numberOfPages)
+PageTable::PageTable()
+    : pid(-1)
 {
-    for (int i = 0; i < numberOfPages; i++)
-    {
-        pages.emplace_back(i);
-    }
+}
+
+PageTable::PageTable(int pid)
+    : pid(pid)
+{
+}
+
+int PageTable::getPid() const
+{
+    return pid;
+}
+
+void PageTable::addPage(const Page& page)
+{
+    pages.push_back(page);
 }
 
 Page& PageTable::getPage(int pageNumber)

@@ -13,22 +13,73 @@
 #include <memory_manager/algorithms/best_fit.h>
 #include <memory_manager/algorithms/next_fit.h>
 #include <memory_manager/algorithms/worst_fit.h>
+#include <memory_manager/paging/pager.h>
 
 int main()
 {
-    WorstFit memory(1000);
+   Pager pager(8, 256);
 
-    memory.allocate(1, 200);
-    memory.allocate(2, 300);
-    memory.allocate(3, 100);
+    Process p1(
+        1,
+        0,
+        5,
+        1,
+        900
+    );
 
-    memory.deallocate(1);
-    memory.deallocate(3);
+    Process p2(
+        2,
+        1,
+        4,
+        2,
+        500
+    );
 
-    MemoryPrinter::print(memory.getBlocks());
+    if (pager.loadProcess(p1))
+    {
+        std::cout << "Process 1 Loaded\n";
+    }
 
-    memory.allocate(4, 90);
+    if (pager.loadProcess(p2))
+    {
+        std::cout << "Process 2 Loaded\n";
+    }
 
-    MemoryPrinter::print(memory.getBlocks());
+    std::cout << "\nFrames\n";
+    std::cout << "-----------------------------\n";
+
+    for (const Frame& frame : pager.getFrames())
+    {
+        std::cout
+            << "Frame "
+            << frame.getFrameNumber()
+            << " | PID = "
+            << frame.getPid()
+            << " | Page = "
+            << frame.getPageNumber()
+            << " | Free = "
+            << std::boolalpha
+            << frame.isFree()
+            << '\n';
+    }
+
+    std::cout << "\nDeallocating Process 1...\n\n";
+
+    pager.deallocateProcess(1);
+
+    for (const Frame& frame : pager.getFrames())
+    {
+        std::cout
+            << "Frame "
+            << frame.getFrameNumber()
+            << " | PID = "
+            << frame.getPid()
+            << " | Page = "
+            << frame.getPageNumber()
+            << " | Free = "
+            << std::boolalpha
+            << frame.isFree()
+            << '\n';
+    }
     return 0;
 }

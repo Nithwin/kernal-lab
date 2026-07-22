@@ -25,4 +25,9 @@ add_executable(KernelLab
     src/memory_manager/algorithms/next_fit.cpp
     src/memory_manager/algorithms/worst_fit.cpp
     src/memory_manager/utils/memory_printer.cpp
+    src/memory_manager/paging/pager.cpp
+    src/memory_manager/paging/page.cpp
+    src/memory_manager/paging/page_table.cpp
+    src/memory_manager/paging/frame.cpp
+
 )
