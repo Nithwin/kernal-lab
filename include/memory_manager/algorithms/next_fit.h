@@ -2,10 +2,13 @@
 
 #include "memory_manager/manager.h"
 
-class BestFit : public MemoryManager
+class NextFit : public MemoryManager
 {
+private:
+    size_t lastIndex;
+
 public:
-    BestFit(int totalMemory);
+    NextFit(int totalMemory);
 
     bool allocate(int pid, int size) override;
 };
