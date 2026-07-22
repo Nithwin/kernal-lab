@@ -19,6 +19,7 @@ class Process
         int arrivalTime; // arrivalTime - time at which process arrives
         int burstTime; // burstTime - time required to complete the process
         int priority; // priority - priority of the process
+        int memorySize; // memorySize - memory required by the process (KB)
 
         // Runtime
         int remainingTime; // remainingTime - time remaining for the process to complete
@@ -30,13 +31,14 @@ class Process
         int responseTime; // responseTime - time from arrival to first execution
     public:
         // Constructor
-        Process(int pid, int arrivalTime, int burstTime, int priority);
+        Process(int pid, int arrivalTime, int burstTime, int priority, int memorySize);
 
         // Getters
         int getPid() const;
         int getArrivalTime() const;
         int getBurstTime() const;
         int getPriority() const;
+        int getMemorySize() const;
 
         int getRemainingTime() const;
         ProcessState getState() const;

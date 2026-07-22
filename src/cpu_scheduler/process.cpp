@@ -1,11 +1,12 @@
 #include "cpu_scheduler/process.h"
 
 Process::Process(
-    int pid, int arrivalTime, int burstTime, int priority
+    int pid, int arrivalTime, int burstTime, int priority, int memorySize
 ) : pid(pid),
     arrivalTime(arrivalTime),
     burstTime(burstTime),
     priority(priority),
+    memorySize(memorySize),
     remainingTime(burstTime),
     state(ProcessState::New),
     startTime(-1),
@@ -36,6 +37,11 @@ int Process::getBurstTime() const
 int Process::getPriority() const 
 {
     return priority;
+}
+
+int Process::getMemorySize() const
+{
+    return memorySize;
 }
 
 int Process::getRemainingTime() const 
