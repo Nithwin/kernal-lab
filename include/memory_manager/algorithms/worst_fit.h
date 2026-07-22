@@ -2,10 +2,10 @@
 
 #include "memory_manager/manager.h"
 
-class BestFit : public MemoryManager
+class WorstFit : public MemoryManager
 {
 public:
-    BestFit(int totalMemory);
+    WorstFit(int totalMemory);
 
     bool allocate(int pid, int size) override;
 };

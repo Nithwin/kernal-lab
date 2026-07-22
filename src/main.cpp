@@ -10,25 +10,76 @@
 #include <cpu_scheduler/utils/schedule_printer.h>
 #include <memory_manager/utils/memory_printer.h>
 #include <memory_manager/algorithms/first_fit.h>
+#include <memory_manager/algorithms/best_fit.h>
+#include <memory_manager/algorithms/next_fit.h>
+#include <memory_manager/algorithms/worst_fit.h>
+#include <memory_manager/paging/pager.h>
 
 int main()
 {
-    FirstFit memory(1024);
+   Pager pager(8, 256);
 
-    memory.allocate(1, 200);
-    memory.allocate(2, 300);
-    memory.allocate(3, 100);
+    Process p1(
+        1,
+        0,
+        5,
+        1,
+        900
+    );
 
-    std::cout << "Initial Layout\n";
-    MemoryPrinter::print(memory.getBlocks());
+    Process p2(
+        2,
+        1,
+        4,
+        2,
+        500
+    );
 
-    std::cout << "\nDeallocate PID 2\n";
-    memory.deallocate(2);
-    MemoryPrinter::print(memory.getBlocks());
+    if (pager.loadProcess(p1))
+    {
+        std::cout << "Process 1 Loaded\n";
+    }
 
-    std::cout << "\nDeallocate PID 3\n";
-    memory.deallocate(3);
-    MemoryPrinter::print(memory.getBlocks());
+    if (pager.loadProcess(p2))
+    {
+        std::cout << "Process 2 Loaded\n";
+    }
 
+    std::cout << "\nFrames\n";
+    std::cout << "-----------------------------\n";
+
+    for (const Frame& frame : pager.getFrames())
+    {
+        std::cout
+            << "Frame "
+            << frame.getFrameNumber()
+            << " | PID = "
+            << frame.getPid()
+            << " | Page = "
+            << frame.getPageNumber()
+            << " | Free = "
+            << std::boolalpha
+            << frame.isFree()
+            << '\n';
+    }
+
+    std::cout << "\nDeallocating Process 1...\n\n";
+
+    pager.deallocateProcess(1);
+
+    for (const Frame& frame : pager.getFrames())
+    {
+        std::cout
+            << "Frame "
+            << frame.getFrameNumber()
+            << " | PID = "
+            << frame.getPid()
+            << " | Page = "
+            << frame.getPageNumber()
+            << " | Free = "
+            << std::boolalpha
+            << frame.isFree()
+            << '\n';
+    }
     return 0;
 }
