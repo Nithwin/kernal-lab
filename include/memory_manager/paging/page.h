@@ -3,13 +3,15 @@
 class Page
 {
 private:
+    int pid;
     int pageNumber;
     int frameNumber;
     bool loaded;
 
 public:
-    Page(int pageNumber);
+    Page(int pid, int pageNumber);
 
+    int getPid() const;
     int getPageNumber() const;
     int getFrameNumber() const;
     bool isLoaded() const;

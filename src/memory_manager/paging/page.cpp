@@ -1,7 +1,8 @@
 #include "memory_manager/paging/page.h"
 
-Page::Page(int pageNumber)
-    : pageNumber(pageNumber),
+Page::Page(int pid, int pageNumber)
+    : pid(pid),
+      pageNumber(pageNumber),
       frameNumber(-1),
       loaded(false)
 {
@@ -20,6 +21,11 @@ int Page::getFrameNumber() const
 bool Page::isLoaded() const
 {
     return loaded;
+}
+
+int Page::getPid() const
+{
+    return pid;
 }
 
 void Page::setFrameNumber(int frameNumber)
