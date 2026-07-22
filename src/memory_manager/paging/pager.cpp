@@ -9,9 +9,9 @@ Pager::Pager(int numberOfFrames, int pageSize)
     }
 }
 
-Frame* Pager::findFreeFrame()
+Frame *Pager::findFreeFrame()
 {
-    for (Frame& frame : frames)
+    for (Frame &frame : frames)
     {
         if (frame.isFree())
         {
@@ -22,7 +22,7 @@ Frame* Pager::findFreeFrame()
     return nullptr;
 }
 
-bool Pager::loadProcess(const Process& process)
+bool Pager::loadProcess(const Process &process)
 {
     int pid = process.getPid();
 
@@ -36,18 +36,18 @@ bool Pager::loadProcess(const Process& process)
 
     PageTable pageTable(pid);
 
-    std::vector<Frame*> allocatedFrames;
+    std::vector<Frame *> allocatedFrames;
 
     for (int pageNumber = 0;
          pageNumber < pagesNeeded;
          pageNumber++)
     {
-        Frame* frame = findFreeFrame();
+        Frame *frame = findFreeFrame();
 
         if (frame == nullptr)
         {
             // Rollback
-            for (Frame* allocated : allocatedFrames)
+            for (Frame *allocated : allocatedFrames)
             {
                 allocated->clear();
             }
@@ -83,7 +83,7 @@ bool Pager::deallocateProcess(int pid)
         return false;
     }
 
-    for (Frame& frame : frames)
+    for (Frame &frame : frames)
     {
         if (frame.getPid() == pid)
         {
@@ -96,13 +96,82 @@ bool Pager::deallocateProcess(int pid)
     return true;
 }
 
-const std::vector<Frame>& Pager::getFrames() const
+const std::vector<Frame> &Pager::getFrames() const
 {
     return frames;
 }
 
-const std::unordered_map<int, PageTable>&
+const std::unordered_map<int, PageTable> &
 Pager::getPageTables() const
 {
     return pageTables;
+}
+
+int Pager::translateAddress(int pid, int logicalAddress)
+{
+    auto process = pageTables.find(pid);
+
+    if (process == pageTables.end())
+    {
+        return -1;
+    }
+
+    PageTable &pageTable = process->second;
+
+    int pageNumber = logicalAddress / pageSize;
+    int offset = logicalAddress % pageSize;
+
+    if (pageNumber >= pageTable.getPages().size())
+    {
+        return -1;
+    }
+
+    const Page &page = pageTable.getPage(pageNumber);
+
+    if (!page.isLoaded())
+    {
+        if (!handlePageFault(pid, pageNumber))
+        {
+            return -1;
+        }
+    }
+
+    int frameNumber = page.getFrameNumber();
+
+    return frameNumber * pageSize + offset;
+}
+
+bool Pager::handlePageFault(int pid, int pageNumber)
+{
+    auto process = pageTables.find(pid);
+
+    if (process == pageTables.end())
+    {
+        return false;
+    }
+
+    PageTable &table = process->second;
+
+    Page &page = table.getPage(pageNumber);
+
+    if (page.isLoaded())
+    {
+        return true;
+    }
+
+    Frame *frame = findFreeFrame();
+
+    if (frame == nullptr)
+    {
+        return false;
+    }
+
+    frame->setFree(false);
+    frame->setPid(pid);
+    frame->setPageNumber(pageNumber);
+
+    page.setFrameNumber(frame->getFrameNumber());
+    page.setLoaded(true);
+
+    return true;
 }

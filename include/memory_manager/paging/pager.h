@@ -24,6 +24,10 @@ public:
 
     bool deallocateProcess(int pid);
 
+    bool handlePageFault(int pid, int pageNumber);
+
+    int translateAddress(int pid, int logicalAddress);
+
     const std::vector<Frame>& getFrames() const;
 
     const std::unordered_map<int, PageTable>& getPageTables() const;
