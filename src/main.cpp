@@ -11,10 +11,12 @@
 #include <memory_manager/utils/memory_printer.h>
 #include <memory_manager/algorithms/first_fit.h>
 #include <memory_manager/algorithms/best_fit.h>
+#include <memory_manager/algorithms/next_fit.h>
+#include <memory_manager/algorithms/worst_fit.h>
 
 int main()
 {
-    BestFit memory(1024);
+    WorstFit memory(1000);
 
     memory.allocate(1, 200);
     memory.allocate(2, 300);
@@ -28,6 +30,5 @@ int main()
     memory.allocate(4, 90);
 
     MemoryPrinter::print(memory.getBlocks());
-
     return 0;
 }
