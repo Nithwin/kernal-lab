@@ -1,61 +1,77 @@
 # KernelLab 💻
 
-> A comprehensive C++ playground designed to teach Operating Systems concepts and algorithms. 
+> A comprehensive Open-Source playground designed to teach Operating Systems concepts and algorithms.
 
 KernelLab is built for students, professionals, and OS enthusiasts who want to master basic and advanced operating systems concepts. It is an excellent resource for **interview preparation** and **exam study**, providing hands-on C++ implementations of the algorithms that power modern systems.
 
 ---
 
-## 🚀 Features & Learning Outcomes
+## 🚀 Modules & Learning Outcomes
 
-By studying or rebuilding this project, you will master:
-- **Core OS Concepts:** Scheduling, Memory Management, Synchronization, Deadlocks, and File Systems.
-- **C++ Architecture:** Advanced Object-Oriented Programming (OOP), Inheritance, Polymorphism, STL usage, and Simulation Design.
+By exploring this repository, you will understand the core components of modern operating systems. The project is neatly divided into several modules, each containing documented code and individual tests to help you learn efficiently.
 
-## 🗺️ Project Roadmap
+### 1️⃣ CPU Scheduling (`src/cpu_scheduler`)
+Understand how an OS decides which process runs next.
+- First-Come, First-Served (FCFS)
+- Shortest Job First (SJF)
+- Shortest Remaining Time First (SRTF)
+- Priority Scheduling
+- Round Robin
 
-This project is currently under active development. Below is the progress of the planned modules:
+### 2️⃣ Memory Management (`src/memory_manager`)
+Learn how an OS allocates RAM and handles virtual memory.
+- Contiguous Allocation (First Fit, Best Fit, Worst Fit, Next Fit)
+- Paging and Frame Management
 
-- [x] **Module 1: CPU Scheduling**
-  - Core Architecture (Process Class, Scheduler Base, Schedule Printer)
-  - First-Come, First-Served (FCFS)
-  - Shortest Job First (SJF - Non-Preemptive)
-  - Shortest Remaining Time First (SRTF - Preemptive SJF)
-  - Priority Scheduling (Non-Preemptive)
-  - Round Robin
-  - C++ Architecture (OOP, Inheritance, STL, Lambdas, Simulation Design)
+### 3️⃣ Process Synchronization (`src/synchronization`)
+Dive into concurrent programming and race condition prevention.
+- Mutexes & Spinlocks (`mutex_demo.cpp`)
+- Semaphores (`semaphore_demo.cpp`)
+- Producer-Consumer Problem (`producer_consumer.cpp`)
+- Dining Philosophers Problem (`dining_philosophers.cpp`)
 
-- [ ] **Module 2: Memory Management** *(In Progress)*
-  - Memory Class & Memory Block
-  - Contiguous Allocation (First, Best, Worst, Next Fit)
-  - Fragmentation (Internal & External)
-  - Compaction
-  - Paging, Page Tables, Logical vs Physical Address Translation
-  - Page Replacement (FIFO, LRU, Optimal, Clock)
-  - Virtual Memory
+### 4️⃣ Disk Scheduling (`src/disk_scheduling`)
+Explore how disk I/O requests are optimized to minimize head movement.
+- FCFS (First-Come, First-Served)
+- SSTF (Shortest Seek Time First)
+- SCAN (Elevator Algorithm)
+- C-SCAN (Circular SCAN)
 
-- [ ] **Module 3: Process Synchronization**
-  - Critical Section, Race Condition, Mutex, Spin Lock, Semaphores
-  - Classic Problems: Producer-Consumer, Readers-Writers, Dining Philosophers
+---
 
-- [ ] **Module 4: Deadlocks**
-  - Coffman Conditions, Resource Allocation Graph
-  - Detection, Prevention, Avoidance (Banker's Algorithm), Recovery
+## 🛠️ Building and Running
 
-- [ ] **Module 5: File Systems**
-  - File Allocation (Contiguous, Linked, Indexed)
-  - Inodes, Directory Structure, Free Space Management, Journaling
+We have organized the project using CMake so you can compile and run tests for each module independently.
 
-- [ ] **Module 6: Disk Scheduling**
-  - FCFS, SSTF, SCAN, C-SCAN, LOOK, C-LOOK
+1. **Configure the build:**
+   ```bash
+   cmake -B build -S .
+   ```
+2. **Compile the project:**
+   ```bash
+   cmake --build build
+   ```
+3. **Run the individual module tests:**
+   ```bash
+   ./build/test_cpu_scheduler
+   ./build/test_memory_manager
+   ./build/test_disk_scheduling
+   ./build/test_sync_dining
+   ./build/test_sync_mutex
+   ./build/test_sync_producer
+   ./build/test_sync_semaphore
+   ```
 
-## 🛠️ Building the Project
+---
 
-*(Instructions for building the project will be expanded as the architecture stabilizes.)*
+## 🤝 Contributing & "Bring Your Own Language"
 
-## 🤝 Contributing
+This repository is designed to be an Open Source learning hub! 
+We highly encourage contributions. 
 
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details. Since the core architecture is still actively evolving, please open an Issue to discuss any major changes before submitting a Pull Request.
+**Want to learn by doing?**
+Create a new directory (e.g., `python/`, `rust/`, `java/`) and port this project into your **favorite programming language**! 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to push your own language implementation here.
 
 ## 📜 License
 
