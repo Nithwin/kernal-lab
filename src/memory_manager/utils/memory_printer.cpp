@@ -1,3 +1,13 @@
+/**
+ * @file memory_printer.cpp
+ * @brief Formatting and printing utilities for Memory Allocation and Paging States.
+ *
+ * FUNCTIONS:
+ *   - print(): Displays a clean Markdown table of contiguous memory blocks.
+ *   - page_print(): Displays comprehensive status of Physical Memory frames,
+ *                   Page Tables per process, and Overall Memory Usage summary statistics.
+ */
+
 #include "memory_manager/utils/memory_printer.h"
 #include "memory_manager/paging/pager.h"
 
@@ -34,7 +44,6 @@ void MemoryPrinter::print(const std::vector<Memory> &blocks)
     }
 }
 
-
 void MemoryPrinter::page_print(const Pager& pager)
 {
     using std::cout;
@@ -46,20 +55,19 @@ void MemoryPrinter::page_print(const Pager& pager)
     cout << "                  MEMORY MANAGEMENT STATE\n";
     cout << "=============================================================\n\n";
 
-    //------------------------------------------------------------
-    // Physical Memory
-    //------------------------------------------------------------
+    // ------------------------------------------------------------
+    // 1. Physical Memory Frame Status
+    // ------------------------------------------------------------
 
     cout << "PHYSICAL MEMORY\n";
     cout << "-------------------------------------------------------------\n";
 
-    cout
-        << left
-        << setw(10) << "Frame"
-        << setw(10) << "PID"
-        << setw(10) << "Page"
-        << setw(10) << "Free"
-        << '\n';
+    cout << left
+         << setw(10) << "Frame"
+         << setw(10) << "PID"
+         << setw(10) << "Page"
+         << setw(10) << "Free"
+         << '\n';
 
     cout << "-------------------------------------------------------------\n";
 
@@ -70,18 +78,17 @@ void MemoryPrinter::page_print(const Pager& pager)
         if (!frame.isFree())
             usedFrames++;
 
-        cout
-            << left
-            << setw(10) << frame.getFrameNumber()
-            << setw(10) << frame.getPid()
-            << setw(10) << frame.getPageNumber()
-            << setw(10) << (frame.isFree() ? "Yes" : "No")
-            << '\n';
+        cout << left
+             << setw(10) << frame.getFrameNumber()
+             << setw(10) << frame.getPid()
+             << setw(10) << frame.getPageNumber()
+             << setw(10) << (frame.isFree() ? "Yes" : "No")
+             << '\n';
     }
 
-    //------------------------------------------------------------
-    // Page Tables
-    //------------------------------------------------------------
+    // ------------------------------------------------------------
+    // 2. Page Tables per Process
+    // ------------------------------------------------------------
 
     cout << "\nPAGE TABLES\n";
     cout << "-------------------------------------------------------------\n";
@@ -92,30 +99,27 @@ void MemoryPrinter::page_print(const Pager& pager)
 
         cout << "\nProcess " << table.getPid() << "\n\n";
 
-        cout
-            << left
-            << setw(10) << "Page"
-            << setw(10) << "Frame"
-            << setw(10) << "Present"
-            << '\n';
+        cout << left
+             << setw(10) << "Page"
+             << setw(10) << "Frame"
+             << setw(10) << "Present"
+             << '\n';
 
         cout << "------------------------------\n";
 
         for (const Page& page : table.getPages())
         {
-            cout
-                << left
-                << setw(10) << page.getPageNumber()
-                << setw(10) << page.getFrameNumber()
-                << setw(10)
-                << (page.isLoaded() ? "Yes" : "No")
-                << '\n';
+            cout << left
+                 << setw(10) << page.getPageNumber()
+                 << setw(10) << page.getFrameNumber()
+                 << setw(10) << (page.isLoaded() ? "Yes" : "No")
+                 << '\n';
         }
     }
 
-    //------------------------------------------------------------
-    // Summary
-    //------------------------------------------------------------
+    // ------------------------------------------------------------
+    // 3. System Memory Summary Statistics
+    // ------------------------------------------------------------
 
     int totalFrames = pager.getFrames().size();
     int freeFrames = totalFrames - usedFrames;

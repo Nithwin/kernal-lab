@@ -1,41 +1,57 @@
+/**
+ * @file fcfs.cpp
+ * @brief First-Come, First-Served (FCFS) CPU Scheduling Algorithm.
+ *
+ * ALGORITHM CONCEPT:
+ *   - Non-preemptive scheduling policy.
+ *   - Processes are dispatched in the exact order of their arrival.
+ *   - If two processes arrive at the same time, PID is used as tie-breaker.
+ *
+ * PROS:
+ *   - Simple to implement using FIFO queue.
+ *   - No starvation.
+ *
+ * CONS:
+ *   - Convoy Effect: Short processes wait behind long CPU-bound processes.
+ *   - High average waiting time.
+ */
+
 #include "cpu_scheduler/algorithms/fcfs.h"
 #include <algorithm>
 
 void FCFSScheduler::schedule(std::vector<Process> &processes)
 {
-    // if list is empty then return
-    if(processes.empty()) return;
+    if (processes.empty()) return;
 
-    // Sorting the processes to main the order of process which arrived first
+    // Step 1: Sort processes by arrival time (earliest first), using PID as tie-breaker
     std::sort(processes.begin(), processes.end(), 
     [](const Process& a, const Process& b)
     {
-        // if same arrival time then sort by pid
         if (a.getArrivalTime() == b.getArrivalTime())
         {
             return a.getPid() < b.getPid();
         }
-        // sort by arrival time
         return a.getArrivalTime() < b.getArrivalTime();
     });
 
-    // to keep track of time
     int currentTime = 0;
 
-    // iterate through all the processes
-    for(Process &process: processes) 
+    // Step 2: Sequentially service each process to completion
+    for (Process &process : processes) 
     {
-        // if current time is less than arrival time, then set current time to arrival time
-        // this means the process has to wait for the cpu to be free
-        if(currentTime < process.getArrivalTime())
+        // If CPU is idle, advance simulation clock to process arrival time
+        if (currentTime < process.getArrivalTime())
         {
             currentTime = process.getArrivalTime();
         }
 
+        // Record start time and set state to Running
         startProcess(process, currentTime);
 
+        // Run until completion (non-preemptive)
         currentTime += process.getBurstTime();
 
+        // Calculate TAT, WT, RT metrics and set state to Terminated
         finishProcess(process, currentTime);
     }
 }
