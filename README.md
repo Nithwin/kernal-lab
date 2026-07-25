@@ -2,6 +2,10 @@
 
 > A comprehensive Open-Source playground designed to teach Operating Systems concepts and algorithms — with code, documentation, and interview prep.
 
+<p align="center">
+  <img src="assets/banner.png" alt="KernelLab Banner" width="100%" />
+</p>
+
 KernelLab is built for **students**, **professionals**, and **OS enthusiasts** who want to master operating systems concepts through clean, documented, hands-on C++ implementations.
 
 Whether you're preparing for a **tech interview**, studying for a **university exam**, or just want to deeply understand how operating systems work, this repo has you covered.
