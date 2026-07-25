@@ -1,23 +1,19 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
-#include <cpu_scheduler/process.h>
-#include <cpu_scheduler/algorithms/fcfs.h>
-#include <cpu_scheduler/algorithms/sjf.h>
-#include <cpu_scheduler/algorithms/srtf.h>
-#include <cpu_scheduler/algorithms/priority.h>
-#include <cpu_scheduler/algorithms/round_robin.h>
-#include <cpu_scheduler/utils/schedule_printer.h>
-#include <memory_manager/utils/memory_printer.h>
-#include <memory_manager/algorithms/first_fit.h>
-#include <memory_manager/algorithms/best_fit.h>
-#include <memory_manager/algorithms/next_fit.h>
-#include <memory_manager/algorithms/worst_fit.h>
-#include <memory_manager/paging/pager.h>
+#include "cpu_scheduler/process.h"
+#include "memory_manager/paging/pager.h"
+#include "memory_manager/utils/memory_printer.h"
 
+/**
+ * @brief Test for the Memory Management Module.
+ * 
+ * Demonstrates how to use Paging and Frame allocation.
+ */
 int main()
 {
-   Pager pager(8, 256);
+    std::cout << "--- Memory Management Module Test ---\n";
+    Pager pager(8, 256);
 
     Process p1(
         1,
