@@ -2,7 +2,7 @@
 
 > A comprehensive Open-Source playground designed to teach Operating Systems concepts and algorithms — with code, documentation, and interview prep.
 
-![KernelLab OS Concepts Architecture](assets/banner.png?v=2)
+![KernelLab OS Concepts Architecture](assets/banner_v2.png)
 
 KernelLab is built for **students**, **professionals**, and **OS enthusiasts** who want to master operating systems concepts through clean, documented, hands-on C++ implementations.
 
